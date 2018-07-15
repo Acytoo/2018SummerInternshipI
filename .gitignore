@@ -1,0 +1,7 @@
+*.png
+*.jpg
+*.jepg
+*.gif
+
+
+# do not upload any train or test image data!!
