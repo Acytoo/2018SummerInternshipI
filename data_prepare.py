@@ -3,6 +3,7 @@ import pandas as pd
 import random
 from sklearn.model_selection import train_test_split
 import shutil
+import csv
 
 '''
 Read pictures' name from disk, store their path and type to a csv file with format {path, type}
@@ -73,14 +74,41 @@ def distribute_train_test(ori_dir, train_dir='train', test_dir='test', test_radi
 	except Exception as e:
 		print(e)
 
+"""
+Those functions work good when there isn't much data, but will consume much ram when the data sets get bigger
+The folling functions solve this problem
+Alec Chen 2018/07/21
+"""
 
+def save_info_csv(parent_folder, csv_name='image_info.csv'):
+        """
+        Prepare data for training and testing, now the data sets are in one directory and in the format of .jpg
+        Args:  parent_folder:  Parent_folder:	Root path
+        2018/07/21
+        """
+        csv_file = open(csv_name, 'w')
+        writer = csv.writer(csv_file)
+        for root, dirs, files in os.walk(parent_folder):
+                for each_file in files:
+                        if '.jpg' in each_file:
+                                try:
+                                        writer.writerow([os.path.join(root, each_file),os.path.join(root, each_file).split('\\')[-2]])
+                                except Exception as e:
+                                        print(e)
+        csv_file.close()
+
+        
+
+
+                
 if __name__ == '__main__':
-	names, types = get_img_path_type('.')
-	print(len(names))
-	print(len(types))
-	store_to_csv(names, types)
+	# names, types = get_img_path_type('.')
+	# print(len(names))
+	# print(len(types))
+	# store_to_csv(names, types)
 
-	print('start move function')
+	# print('start move function')
 
 
-	distribute_train_test('tiger', 'yttrain', 'yttest')
+	# distribute_train_test('tiger', 'yttrain', 'yttest')
+        save_info_csv('.')
