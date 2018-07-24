@@ -67,6 +67,27 @@ class Graph:
 
         return trainImgList
 
+    def _normGraph(self,path,h,w):
+
+        mat=cv2.imread(path)
+        #print("path: "+path)
+
+        if  mat is None:
+            return
+
+        #print(mat.shape)
+
+        mat=cv2.resize(mat, (h,w),interpolation=cv2.INTER_CUBIC)
+        cv2.imwrite(path,mat)
+
+    def normTrainTest(self,h,w):
+        trainList=self.readTrainCSV()
+        testList=self.readTestCsv()
+        for i in trainList:
+            self._normGraph(i[0],h,w)
+        for i in testList:
+            self._normGraph(i[0],h,w)
+
     def isDivided(self):
         if os.path.exists(os.path.join(self.rootDir,self.trainCsvName)):
             return True
@@ -75,6 +96,16 @@ class Graph:
         [dirname,filename]=os.path.split(path)
 
         matrix=cv2.imread(path)
+
+        return matrix
+
+    def getGreyGraph(self,path):
+        matrix = cv2.imread(path)
+        if matrix is None:
+            print("read error")
+            return None
+
+        matrix=cv2.cvtColor(matrix,cv2.COLOR_RGB2GRAY)
 
         return matrix
 
@@ -114,7 +145,6 @@ class Graph:
 
         self._writeToCSV(imgPathList,originCSV)
 
-
         random.shuffle(imgPathList)
         trainList=random.sample(imgPathList,int(len(imgPathList)*trainSize))
         testList=[i for i in imgPathList if i not in trainList]
@@ -148,5 +178,7 @@ class Graph:
 
         return self._readCsv(originCsvPath)
 
+
 g=Graph(r"E:\ds2018")
-print(g.readTrainCSV())
+#g.divideTrainTest("ds2018")
+g.normTrainTest(128,128)
