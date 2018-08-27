@@ -4,6 +4,8 @@
 *.gif
 *.csv
 .idea/
+*.pkl
+*.npy
 
 # do not upload any train or test image data!!
 # also delete .idea
