@@ -2,7 +2,7 @@
 
 ### This repository is basically a record of our learning process of 2018 Summer Internship I, including data crawling, image processing, feature extraction and svm training.
 
-  After learnig and trying, we built an image classfier, the classifier was uploaded to an [online judge](http://219.216.65.165:9000), the oj trained classfiers from all 21 teams on a dataset we didn't know, then tested them. The good news was that we were the top 3 of all the 21 teams, we are team16, and full results can be found [here](http://219.216.65.165:9000/result).
+  After learnig and trying, we built an image classfier, the classifier was uploaded to an [online judge](http://219.216.65.165:9000), the oj trained classfiers from all 21 teams on a dataset we didn't know, then tested them. The good news was that we were the top 3 of all the 21 teams(and we are the fastest group with least memory usage), we are team16, and full results can be found [here](http://219.216.65.165:9000/result).
 
 ![image](https://acytoo.github.io/HPSRC/2018Internship/result.png)
 
